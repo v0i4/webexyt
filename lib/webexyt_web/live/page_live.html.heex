@@ -1,0 +1,30 @@
+<div>
+  <label for="url-input">URL:</label>
+  <input
+    class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    type="text"
+    id="url-input"
+    phx-debounce="300"
+    phx-blur="url-validate"
+    value={@url}
+  />
+  <%= if @loading do %>
+    LOADING....
+  <% end %>
+  <%= if @valid_url do %>
+    <h1>Title</h1>
+    <p><%= @title %></p>
+    <h1>Description:</h1>
+    <p><%= @description %></p>
+
+    <button phx-click="download" phx-value-url={@url}>
+      <h2>Generate download Link</h2>
+    </button>
+  <% else %>
+    <h1>Enter a valid YT URL</h1>
+    <h1>https://www.youtube.com/watch?v=BaW_jenozKc</h1>
+  <% end %>
+  <%= if !is_nil(@final_url) do %>
+    <a href={@final_url} phx-link={@final_url}>DOWNLOAD</a>
+  <% end %>
+</div>
